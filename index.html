@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Javascript Quiz</title>
+  </head>
+  <body>
+    <div class= "quiz">
+      <h1>Coding Quiz</h1>
+      <h3>Welcome to the Javascript quiz! Please answer the series of questions to see how well your understanding of Javascript is. You will have a limited amount of time to complete the quiz and if you answer incorrectly then the time will be deducted.</h3>
+      <p> Click on Start to begin:</p>
+      <button class="startButton" id="startQuiz">START</button>
+    </div>
+      <div class="container">
+        <div id= "questions"></div>
+        <div id= "answerCheck"></div>
+      </div>
+        <form class="bottom">
+          <div id="score">Your Score: </div>
+            <input type="text" name="name" id="initials" placeholder="name" />
+            <button id="submit">Submit</button>
+          <div class="timer">Time Left: <span id="countdown">80</span></div>
+          <h3 id="highscore">Highscores</h3>
+        </form>
+    <script src="./script.js"></script>
+  </body>
+</html>

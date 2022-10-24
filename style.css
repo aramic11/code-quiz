@@ -1,0 +1,135 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body {
+font-family:'Times New Roman', Times, serif ;
+background-image:url(https://wallpapercave.com/wp/wp2552042.jpg);
+margin: auto 0;
+justify-content:space-between;
+}
+
+h1 {
+margin-top: 45px auto;
+color: #1b47d8;
+text-align: center;
+}
+
+.timer {
+  width: 250px;
+  height: 50px;
+  border-radius: 8px;
+  background-color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  color: rgb(183, 59, 88);
+  display: block;
+  white-space: nowrap;
+}
+
+#highscore {
+  width: 250px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  color: rgb(183, 59, 88);
+  display: block;
+}
+
+#score {
+  width: 250px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: white;
+  text-align: left;
+  line-height: 50px;
+  font-size: 30px;
+  color: rgb(229, 26, 26);
+  display: inline-block;
+  margin: 20px;
+}
+
+.quiz {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px;
+  height: 300px;
+  max-width: 700px;
+  border-radius: 8px;
+  background-color: rgb(106, 156, 173);
+  color: black;
+  display: block;
+  float: center;
+  text-align: center;
+}
+
+.startButton{
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #03344c;
+  text-align: center;
+  justify-content: center;
+  line-height: 50px;
+  font-size: 30px;
+  color: red;
+  display: block;
+  margin: 0 auto;
+}  
+
+#submit {
+  border-radius: 5px;
+  text-align: center;
+  background-color: red;
+  color: white;
+}
+
+#answersCheck {
+  text-align: center;
+  color: rgb(225, 7, 36);
+  font-size: 50px;
+  background-color: white;
+}
+
+#questions {
+  padding: 25px;
+  height: 450px;
+  max-width: 700px;
+  border-radius: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #24739a;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  color: rgb(233, 233, 240);
+  display: block;
+  margin: 50 auto;
+  overflow-wrap:inherit ;
+}  
+.bottom {
+  padding: 25px;
+  height: 350px;
+  max-width: 700px;
+  border-radius: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #56a7cf;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  color: rgb(255, 3, 3);
+  display: block;
+  margin: 50 auto;
+}  
+
