@@ -98,6 +98,7 @@ questionsEl.addEventListener("click", function(event) {
       countdownEl.textContent = timeLeft;
       timeLeft--;
     } else {
+      alert("Time is Up");
       clearInterval(timeInterval);
     }
   }, 1000);
