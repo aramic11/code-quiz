@@ -127,3 +127,40 @@ function renderQuestions(validQuestion) {
   optionsList.append(option3);
   optionsList.append(option4);
 }
+
+// Setting up local storage to add highschore and initials to it.
+  
+submitEl.addEventListener("click", function (event) {
+  event.preventDefault();
+  let game = {
+    initials: initialsEl.value,
+    score: quizScore,
+  };
+  games.push(game);
+  privateData();
+  renderTheGame();
+});
+
+function renderTheGame() {
+  for (let i = 0; i < games.length; i++) {
+    console.log(games[i]);
+    let highScores = document.createElement("li");
+    highScores.textContent = games[i].initials + games[i].score;
+    highscoreEl.append(highScores);
+  }
+
+  console.log(games.length);
+}
+
+function privateData() {
+  console.log(games);
+  localStorage.setItem("games", JSON.stringify(games));
+}
+function storeData() {
+  let privateData = JSON.parse (localStorage.getItem("games"));
+  if (privateData !== null) {
+    games = privateData;
+  }
+}
+
+storeData();
