@@ -71,7 +71,7 @@ startQuizEl.addEventListener("click", function () {
 //This is so the game continues to ask questions as you complete each question until you get to the last one
 questionsEl.addEventListener("click", function(event) {
   if (index == 5) {
-      alert("Thank you for Testing your JavaScript Knowledge, the game is over. Please submit your score a refresh the browse to try again");
+      alert("Thank you for Testing your JavaScript Knowledge, the game is over. Please submit your score and refresh the browser to try again");
   } else if (event.target.textContent != questionList[index - 1].correctAnswer) {
     timeLeft -= 10;
   } else {
