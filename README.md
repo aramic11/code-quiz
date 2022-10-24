@@ -5,4 +5,4 @@ I had to create a quiz that will test the user's javacript knowledge. This was b
 
 ## Links
 Website: https://aramic11.github.io/code-quiz/
-Github: https://github.com/aramic11/code-quiz
+Github: https://github.com/aramic11/code-quiz![Screen Shot 2022-10-24 at 3 55 50 PM](https://user-images.githubusercontent.com/113563367/197619967-96366848-ba62-4145-9065-6516b611f04f.png)
