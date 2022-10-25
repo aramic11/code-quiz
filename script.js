@@ -3,18 +3,18 @@ let timeLeft = 80;
 let quizScore = 200;
 let index = 1;
 let games = [];
-let countdownEl = document.getElementById("countdown");
-let startQuizEl = document.getElementById("startQuiz");
-let questionsEl = document.getElementById("questions");
-let answerCheckEl = document.getElementById("answerCheck");
-let scoreEl = document.getElementById("score");
-let highscoreEl = document.getElementById("highscore");
-let initialsEl = document.getElementById("initials");
-let submitEl = document.getElementById("submit");
+const countdownEl = document.getElementById("countdown");
+const startQuizEl = document.getElementById("startQuiz");
+const questionsEl = document.getElementById("questions");
+const answerCheckEl = document.getElementById("answerCheck");
+const scoreEl = document.getElementById("score");
+const highscoreEl = document.getElementById("highscore");
+const initialsEl = document.getElementById("initials");
+const submitEl = document.getElementById("submit");
 
 
 //These are going to be the questions asked
-let questionList = [
+const questionList = [
 {   question: "Commonly used data types do NOT include:",
     options: {
         1: "alerts",
