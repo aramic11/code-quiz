@@ -1,167 +1,155 @@
-//assigning some variables
-let timeLeft = 80;
-let quizScore = 200;
-let index = 1;
-let games = [];
-const countdownEl = document.getElementById("countdown");
-const startQuizEl = document.getElementById("startQuiz");
-const questionsEl = document.getElementById("questions");
-const answerCheckEl = document.getElementById("answerCheck");
-const scoreEl = document.getElementById("score");
-const highscoreEl = document.getElementById("highscore");
-const initialsEl = document.getElementById("initials");
-const submitEl = document.getElementById("submit");
-
-
-//These are going to be the questions asked
-const questionList = [
-{   question: "Commonly used data types do NOT include:",
-    options: {
-        1: "alerts",
-        2: "booleans",
-        3: "numbers",
-        4: "strings",
-      },
-    correctAnswer: "alerts"
-},
-{   question: "The condition in an if/else statement is enclosed within?",
-    options: {
-        1: "curly brackets",
-        2: "square brackets",
-        3: "parentheses",
-        4: "quotes",
-      },
-    correctAnswer: "parentheses"
-},
-{   question: "Arrays in JavaScript can be used to store which of the following?",
-    options: {
-        1: "booleans",
-        2: "square brackets",
-        3: "numbers",
-        4: "all of the above",
-      },
-    correctAnswer: "all of the above"
-},
-{   question: "String values must be enclosed within what before being assigned to variables?",
-    options: {
-        1: "curly brackets",
-        2: "square brackets",
-        3: "parentheses",
-        4: "quotes",
-      }, 
-    correctAnswer: "quotes"
-},
-{   question: "When defining a variable, which should be used so it could be overwritten?",
-    options: {
-        1: "let",
-        2: "var",
-        3: "const",
-        4: "all of the above",
-      },
-    correctAnswer: "let"
-} 
+//Questions to ask the user
+const quizData = [
+  {
+    question: "Commonly used data types do NOT include:",
+    options: ["alerts", "booleans", "numbers", "strings"],
+    answer: "alerts"
+  },
+  {
+    question: "The condition in an if/else statement is enclosed within?",
+    options: ["curly brackets", "square brackets", "parentheses", "quotes"],
+    answer: "parentheses"
+  },
+  {
+    question: "Arrays in JavaScript can be used to store which of the following?",
+    options: ["booleans", "square brackets", "numbers", "all of the above"],
+    answer: "all of the above"
+  },
+  {
+    question: "String values must be enclosed within what before being assigned to variables?",
+    options: ["curly brackets", "square brackets", "parentheses", "quotes"],
+    answer: "quotes"
+  },
+  {
+    question: "When defining a variable, which should be used so it could be overwritten?",
+    options: ["let", "var", "const", "all of the above"],
+    answer: "let"
+  }
 ];
 
-//when the start button is clicked, the countdown will begin and the questions will be asked
-startQuizEl.addEventListener("click", function () {
-  countdown();
-  renderQuestions(questionList[0]);
+const quizTime = document.getElementById("quiz-time");
+const quizQuestion = document.getElementById("quiz-question");
+const quizOptions = document.getElementById("quiz-options");
+const quizSubmit = document.getElementById("quiz-submit");
+const quizResults = document.getElementById("quiz-results");
+const quizRestart = document.getElementById("quiz-restart");
+const quizInitials = document.getElementById("quiz-initials");
+const highScores = document.getElementById("high-scores");
+const startButton = document.getElementById("start-button");
+const welcomeMessage = document.querySelector("#quiz-container p");
+
+
+let currentQuestion = 0;
+let score = 0;
+let timeLeft = 60;
+let timerId;
+
+startButton.addEventListener("click", function() {
+  welcomeMessage.style.display = "none";
+  startQuiz();
 });
 
-//This is so the game continues to ask questions as you complete each question until you get to the last one
-questionsEl.addEventListener("click", function(event) {
-  if (index == 5) {
-      alert("Thank you for Testing your JavaScript Knowledge, the game is over. Please submit your score and refresh the browser to try again");
-  } else if (event.target.textContent != questionList[index - 1].correctAnswer) {
-    timeLeft -= 10;
+//Function to start the quiz
+function startQuiz() {
+  startButton.classList.add("hidden");
+  quizTime.textContent = `Time left: ${timeLeft}s`;
+  showQuestion();
+  quizSubmit.addEventListener("click", submitAnswer);
+  quizRestart.addEventListener("click", restartQuiz);
+  timerId = setInterval(countdown, 1000);
+  loadScores();
+};
+
+function showQuestion() {
+  const question = quizData[currentQuestion];
+  quizQuestion.textContent = question.question;
+  quizOptions.innerHTML = "";
+  for (const option of question.options) {
+    const label = document.createElement("label");
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "option";
+    radio.value = option;
+    label.append(radio, option);
+    quizOptions.appendChild(label);
+  }
+};
+
+//function to submit an answer
+function submitAnswer() {
+  const selectedOption = document.querySelector("input[name='option']:checked");
+  if (!selectedOption) {
+    return; // do not allow empty submissions
+  }
+  const answer = selectedOption.value;
+  if (answer === quizData[currentQuestion].answer) {
+    score++;
   } else {
-    index++; 
-    console.log(timeLeft);
-    renderQuestions(questionList[index - 1]);
-  }
-});
-//The User starts with 200 points and for each question he gets wrong, 20 is deducted
-questionsEl.addEventListener("click", function(event) {
-  if (event.target.textContent === questionList[index - 1].correctAnswer) {
-      quizScore += 20;
-      scoreEl.textContent = "Your score = " + quizScore
-  }else {
-      quizScore -= 20;
-      scoreEl.textContent = "Your score = " + quizScore
-      setTimeout(questionList[index - 1]);
-  }
-});
- // Timer that counts down from 80 seconds
- function countdown() {
-  let timeInterval = setInterval(function () {
-    if (timeLeft > 1) {
-      countdownEl.textContent = timeLeft;
-      timeLeft--;
-    } else {
-      alert("Time is Up");
-      clearInterval(timeInterval);
+    timeLeft -= 10; // subtract 10 seconds for incorrect answers
+    if (timeLeft < 0) {
+      timeLeft = 0;
     }
-  }, 1000);
-}
-// This functions is used to start the quiz and so the viewer could see the questions on display
-function renderQuestions(validQuestion) {
-  questionsEl.innerHTML = "";
-
-  // creates the questions and options and then appends them to the screen. Saw a youtube video on how to do this
-  let questionAsked = document.createElement("p");
-  let optionsList = document.createElement("ol");
-  let option1 = document.createElement("li");
-  let option2 = document.createElement("li");
-  let option3 = document.createElement("li");
-  let option4 = document.createElement("li");
-
-  questionAsked.textContent = validQuestion.question;
-  option1.textContent = validQuestion.options[1];
-  option2.textContent = validQuestion.options[2];
-  option3.textContent = validQuestion.options[3];
-  option4.textContent = validQuestion.options[4];
-
-  questionsEl.append(questionAsked);
-  questionsEl.append(optionsList);
-  optionsList.append(option1);
-  optionsList.append(option2);
-  optionsList.append(option3);
-  optionsList.append(option4);
-}
-
-// Setting up local storage to add highschore and initials to it.
-  
-submitEl.addEventListener("click", function (event) {
-  event.preventDefault();
-  let game = {
-    initials: initialsEl.value,
-    score: quizScore,
-  };
-  games.push(game);
-  privateData();
-  renderTheGame();
-});
-
-function renderTheGame() {
-  for (let i = 0; i < games.length; i++) {
-    console.log(games[i]);
-    let highScores = document.createElement("li");
-    highScores.textContent = games[i].initials + games[i].score;
-    highscoreEl.append(highScores);
   }
-
-  console.log(games.length);
-}
-
-function privateData() {
-  console.log(games);
-  localStorage.setItem("games", JSON.stringify(games));
-}
-function storeData() {
-  let privateData = JSON.parse (localStorage.getItem("games"));
-  if (privateData !== null) {
-    games = privateData;
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    showQuestion();
+  } else {
+    endQuiz();
   }
-}
+};
 
-storeData();
+function endQuiz() {
+  clearInterval(timerId);
+  quizResults.textContent = `You scored ${score} out of ${quizData.length}.`;
+  quizSubmit.removeEventListener("click", submitAnswer);
+  quizRestart.classList.remove("hidden");
+
+  // Allow user to save initials and score
+  const initials = prompt("Enter your initials to save your score:");
+  if (initials) {
+    const scoreItem = document.createElement("li");
+    scoreItem.textContent = `${initials}: ${score}`;
+    highScores.appendChild(scoreItem);
+    saveScore(initials, score);
+  }
+};
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  timeLeft = 60;
+  quizResults.textContent = "";
+  quizRestart.classList.add("hidden");
+  startQuiz();
+};
+
+function countdown() {
+  timeLeft--;
+  quizTime.textContent = `Time left: ${timeLeft}s`;
+  if (timeLeft <= 0) {
+    endQuiz();
+  }
+};
+
+//Saves score to local storage
+function saveScore(initials, score) {
+  const highScoresString = localStorage.getItem("highScores");
+  let highScoresArray = highScoresString ? JSON.parse(highScoresString) : [];
+  highScoresArray.push({ initials, score });
+  highScoresArray.sort((a, b) => b.score - a.score);
+  if (highScoresArray.length > 5) {
+    highScoresArray = highScoresArray.slice(0, 5);
+  }
+  localStorage.setItem("highScores", JSON.stringify(highScoresArray));
+};
+
+function loadScores() {
+  const highScoresString = localStorage.getItem("highScores");
+  let highScoresArray = highScoresString ? JSON.parse(highScoresString) : [];
+  highScores.innerHTML = "";
+  for (const { initials, score } of highScoresArray) {
+    const scoreItem = document.createElement("li");
+    scoreItem.textContent = `${initials}: ${score}`;
+    highScores.appendChild(scoreItem);
+  }
+};
