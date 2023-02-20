@@ -9,4 +9,7 @@ Github: https://github.com/aramic11/code-quiz
 
 ## Snipit
 
-![Screen Shot 2022-10-24 at 3 55 50 PM](https://user-images.githubusercontent.com/113563367/197620222-4e31165f-1767-4bfd-a983-7fd256e09167.png)
+![Screen Shot 2023-02-20 at 6 33 37 PM](https://user-images.githubusercontent.com/113563367/220213119-3b166b57-5ccd-4115-8e83-6ff7a5e77d3f.png)
+![Screen Shot 2023-02-20 at 6 33 07 PM](https://user-images.githubusercontent.com/113563367/220213130-b045d0aa-0591-4655-9fc1-9dcada76c038.png)
+![Screen Shot 2023-02-20 at 6 33 29 PM](https://user-images.githubusercontent.com/113563367/220213148-b5910a21-48c6-4851-aace-49f5ee088371.png)
+
